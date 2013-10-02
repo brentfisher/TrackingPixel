@@ -24,3 +24,5 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+//configure database
+require("./mongo.js");

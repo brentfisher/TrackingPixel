@@ -1,4 +1,4 @@
-var trackingProvider = new TrackingProvider('localhost', 27017);
+var trackingProvider = new TrackingProvider();
 
 exports.tracking = function(req, res){
   var data = req.query;

@@ -6,21 +6,21 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
-//var url = require('url');
 
 /**
  * Custom Modules
  */
-var TrackingProvider = require('./TrackingProvider');
+var TrackingProvider = require('./lib/TrackingProvider');
 
 /** 
  * Routes
  */
-var routes = require('./routes');
-var user = require('./routes/user');
-var track = require('./routes/track');
+//var routes = require('./routes');
+//var user = require('./routes/user');
+//var track = require('./routes/track');
 
-var app = express();
+app = express();
+
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -38,15 +38,15 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+require("./controllers")
+require("./routes")
+
 /**
  * Configure Mongo
  */
 
 //var trackingProvider = new TrackingProvider('localhost', 27017);
 
-app.get('/', routes.index);
-//app.get('/users', user.list);
-app.get('/track', track.tracking);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

@@ -1,7 +1,3 @@
-/*
- * GET tracking listing.
- */
-
 var trackingProvider = new TrackingProvider('localhost', 27017);
 
 exports.tracking = function(req, res){

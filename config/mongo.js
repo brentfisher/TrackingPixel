@@ -5,7 +5,7 @@ var BSON = require('mongodb').BSON;
 var ObjectID = require('mongodb').ObjectID;
 
 Db = function() {
-  var db = new MongoDB('node-tracking', new Server('localhost', 27017, {safe: false}, {auto_reconnect: true}, {}));
+  var db = new MongoDB('node-tracking', new Server('localhost', 27017, {}), {safe: false});
   return db;
 };
 

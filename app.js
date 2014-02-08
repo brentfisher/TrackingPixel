@@ -12,9 +12,15 @@ if ('development' == app.get('env')) {
 }
 
 //configure database
-// require("./mongo.js");
+var db = require('./config/mongo.js');
+db.connect(function(db) { 
+  // Yay, it works! See below for debugging:
+  // db.collection("jsevents").find({}, function(err, doc) {
+  // console.log(doc);
+  // });
+  routes(app, db);
 
-routes(app);
+  app.listen(app.get("port"));
+  console.log("Express server listening");
+});
 
-app.listen(app.get("port"));
-console.log("Express server listening");

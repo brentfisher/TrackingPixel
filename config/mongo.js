@@ -1,12 +1,16 @@
-var MongoDB = require('mongodb').Db;
-var Connection = require('mongodb').Connection;
-var Server = require('mongodb').Server;
-var BSON = require('mongodb').BSON;
-var ObjectID = require('mongodb').ObjectID;
+var MongoClient = require('mongodb').MongoClient
+  , Server = require('mongodb').Server;
 
-Db = function() {
-  var db = new MongoDB('node-tracking', new Server('localhost', 27017, {safe: false}, {auto_reconnect: true}, {}));
-  return db;
-};
-
-exports.Db = Db;
+var db =  {
+  connect: function(callback) {
+    var mongoClient = new MongoClient(new Server('localhost', 27017));
+    mongoClient.open(function(err, mongoClient) {
+      if (err) throw err;
+      else {
+        var db = mongoClient.db("inteljs");
+        callback(db);
+      }
+    });
+  }
+}
+module.exports = db;

@@ -1,10 +1,20 @@
-//Load configuration of environments, dbs
-require("./config")
+var express = require('express'),
+routes = require('./routes'),
+app = express();
 
-//load application files
-require("./lib");
-require("./controllers");
-require("./routes");
+// all environments
+app.set('port', process.env.PORT || 3000);
+app.use(express.logger('dev'));
 
-//start the server
-require('./config/server.js');
+// development only
+if ('development' == app.get('env')) {
+  app.use(express.errorHandler());
+}
+
+//configure database
+// require("./mongo.js");
+
+routes(app);
+
+app.listen(app.get("port"));
+console.log("Express server listening");
